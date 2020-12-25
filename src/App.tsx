@@ -1,26 +1,53 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {Container, Grid} from '@material-ui/core'
+import {createStyles, makeStyles, Theme} from '@material-ui/core/styles'
+import React from 'react'
+import Footer from './components/Footer'
+import Header from './components/Header'
+import Shell from './components/Shell'
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      height: 140,
+      width: 100,
+    },
+    control: {
+      padding: theme.spacing(2),
+    },
+    header: {
+
+    },
+    shell: {
+      minHeight: "80vh",
+    },
+    footer: {
+      minHeight: "10vh"
+    },
+  }),
+)
 
 function App() {
+
+  const classes = useStyles()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Grid container className={classes.root} spacing={6}>
+      <Grid className={classes.header} item xs={12}>
+        <Header />
+      </Grid>
+      <Grid className={classes.shell} item xs={12}>
+        <Container>
+          <Shell />
+        </Container>
+      </Grid>
+      <Grid className={classes.footer} item xs={12}>
+        <Footer />
+      </Grid>
+    </Grid>
+  )
 }
 
-export default App;
+export default App
