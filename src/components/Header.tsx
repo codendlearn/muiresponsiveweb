@@ -1,14 +1,20 @@
-import {AppBar, createStyles, IconButton, List, makeStyles, Theme, Toolbar} from '@material-ui/core'
+import {AppBar, createStyles, Drawer, IconButton, List, ListItem, ListItemText, makeStyles, Theme, Toolbar} from '@material-ui/core'
 import {MenuOpen} from '@material-ui/icons'
-import React from 'react'
+import React, {useState} from 'react'
 import {NavLink} from 'react-router-dom'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        rootDrawer: {
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: "column",
+        },
         root: {
             flexGrow: 1,
             display: 'flex',
         },
+
         paper: {
             height: 140,
             width: 100,
@@ -30,13 +36,15 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Header = () => {
     const classes = useStyles()
+    const [open, setOpen] = useState(false)
+
+    const handleMenu = () => {
+        setOpen(!open)
+    }
 
     return (
         <AppBar position="static">
             <Toolbar>
-                <IconButton>
-                    <MenuOpen />
-                </IconButton>
                 <List className={classes.root}>
                     <NavLink to="/">
                         <div>one</div>
@@ -55,7 +63,35 @@ const Header = () => {
 
 
                 </List>
+                <IconButton onClick={handleMenu}>
+                    <MenuOpen />
+                </IconButton>
             </Toolbar>
+            <Drawer open={open} onClose={handleMenu} variant="temporary" anchor="right">
+                <Toolbar />
+                <List className={classes.rootDrawer}>
+                    <ListItem>
+                        <NavLink to="/">
+                            <ListItemText>One</ListItemText>
+                        </NavLink>
+                    </ListItem>
+                    <NavLink to="/">
+                        <ListItem>
+                            <ListItemText>One</ListItemText>
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/">
+                        <ListItem>
+                            <ListItemText>One</ListItemText>
+                        </ListItem>
+                    </NavLink>
+                    <NavLink to="/">
+                        <ListItem>
+                            <ListItemText>One</ListItemText>
+                        </ListItem>
+                    </NavLink>
+                </List>
+            </Drawer>
         </AppBar>
     )
 }
